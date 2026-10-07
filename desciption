@@ -1,18 +1,1 @@
-Query sentences
-       ↓
-Sentence Transformer
-       ↓
-Semantic embeddings
-       ↓
-K-Means
-       ↓
-Groups
-       ↓
-TF-IDF
-       ↓
-Important words from those sentences
-       ↓
-Readable topic name
 
-
-  
