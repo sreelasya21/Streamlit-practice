@@ -69,7 +69,7 @@ Matches queries based on:
 
 **Fuzzy search**
 
-Uses FuzzyWuzzy to identify queries with similar wording, helping users find relevant results even when the search text is not an exact match.
+Uses `FuzzyWuzzy` to identify queries with similar wording, helping users find relevant results even when the search text is not an exact match.
 
 > Fuzzy matching is an algorithmic string-similarity technique, not a machine-learning model.
 
@@ -81,7 +81,7 @@ The application tracks query-related activity and provides:
 * Top searches
 * Frequently viewed queries
 
-st.session_state is used to maintain session-level search and view history across Streamlit reruns.
+`st.session_state` is used to maintain session-level search and view history across Streamlit reruns.
 
 ### 5. AI-Powered Query Analytics
 
@@ -89,7 +89,7 @@ The project includes an AI-based analytics module for discovering recurring prob
 
 The pipeline is:
 
-
+```text
 Query Title + Description
           ↓
 Sentence Transformer
@@ -100,15 +100,15 @@ Semantic Embedding
 K-Means Clustering
           ↓
 Recurring Query Groups
+```
 
-
-The pretrained ** all-MiniLM-L6-v2 ** model converts query text into semantic embeddings.
+The pretrained **`all-MiniLM-L6-v2`** model converts query text into semantic embeddings.
 
 These embeddings are then clustered using **K-Means**, an unsupervised machine-learning algorithm.
 
 For example:
 
-
+```text
 "Unable to login to my account"
 "My credentials are rejected"
 "I cannot sign into the application"
@@ -118,7 +118,7 @@ For example:
        Same cluster
               ↓
    Recurring problem area
-
+```
 
 This helps the team identify repeated issues even when users describe them using different words.
 
@@ -136,7 +136,7 @@ It is a pretrained Sentence Transformer model used to generate semantic represen
 
 The query title and description are combined and converted into a numerical embedding.
 
-
+```text
 Text
  ↓
 Tokenization
@@ -148,7 +148,7 @@ Contextual representations
 Pooling
  ↓
 384-dimensional sentence embedding
-
+```
 
 The resulting embeddings allow queries to be represented mathematically and compared based on their semantic relationships.
 
@@ -172,7 +172,7 @@ For a production system, the number of clusters could be evaluated using methods
 
 ## 🏗️ System Architecture
 
-`
+```text
                     User
                       │
                       ↓
@@ -201,7 +201,7 @@ For a production system, the number of clusters could be evaluated using methods
                       ↓
                 GitLab Issues
 
-'
+
               AI Analytics Pipeline
                       │
                       ↓
@@ -219,6 +219,7 @@ For a production system, the number of clusters could be evaluated using methods
                       ↓
              Query Clusters
 
+```
 
 ---
 
@@ -264,7 +265,7 @@ For a production system, the number of clusters could be evaluated using methods
 
 ## 📂 Project Structure
 
-
+```text
 Query-Descriptor/
 │
 ├── app.py
@@ -277,19 +278,19 @@ Query-Descriptor/
 │
 ├── local_issues.json
 └── issues.csv
-
+```
 
 ### File Description
 
 | File                | Purpose                                         |
 | ------------------- | ----------------------------------------------- |
-|  app.py             | Main Streamlit application                      |
-|  ai_analytics.py    | Semantic embedding and K-Means clustering logic |
-|  requirements.txt   | Python dependencies                             |
-|  .env               | GitLab configuration and credentials            |
-| local_issues.json   | Local query storage                             |
-|  issues.csv         | Tabular representation of local queries         |
-| uploads/            | Stores uploaded screenshots/log files           |
+| `app.py`            | Main Streamlit application                      |
+| `ai_analytics.py`   | Semantic embedding and K-Means clustering logic |
+| `requirements.txt`  | Python dependencies                             |
+| `.env`              | GitLab configuration and credentials            |
+| `local_issues.json` | Local query storage                             |
+| `issues.csv`        | Tabular representation of local queries         |
+| `uploads/`          | Stores uploaded screenshots/log files           |
 
 ---
 
@@ -297,46 +298,46 @@ Query-Descriptor/
 
 ### 1. Clone the repository
 
-
+```bash
 git clone <your-repository-url>
 cd Query-Descriptor
-
+```
 
 ### 2. Create a virtual environment
 
-
+```bash
 python -m venv venv
-
+```
 
 Activate it on Windows:
 
-
+```bash
 venv\Scripts\activate
-
+```
 
 ### 3. Install dependencies
 
-
+```bash
 pip install -r requirements.txt
-
+```
 
 ### 4. Configure GitLab credentials
 
 Create a `.env` file:
 
-
+```env
 GITLAB_URL=https://your-gitlab-instance/
 GITLAB_PRIVATE_TOKEN=your_token_here
 GITLAB_PROJECT_ID=your_project_id
-
+```
 
 **Do not commit `.env` or expose your GitLab personal access token.**
 
 ### 5. Run the application
 
-
+```bash
 streamlit run app.py
-
+```
 
 The application will open in your browser.
 
@@ -344,9 +345,9 @@ The application will open in your browser.
 
 ## 📦 Requirements
 
-Example requirements.txt :
+Example `requirements.txt`:
 
-
+```text
 streamlit
 python-gitlab
 fuzzywuzzy
@@ -355,7 +356,7 @@ matplotlib
 python-dotenv
 sentence-transformers
 scikit-learn
-
+```
 
 ---
 
@@ -365,19 +366,19 @@ Sensitive credentials should be stored outside the source code.
 
 Recommended:
 
-
+```text
 .env
-
+```
 
 and included in:
 
-
+```text
 .gitignore
-
+```
 
 Example:
 
-
+```text
 .env
 __pycache__/
 *.pyc
@@ -385,7 +386,7 @@ uploads/
 local_issues.json
 issues.csv
 .streamlit/secrets.toml
-
+```
 
 Never commit GitLab personal access tokens to a public repository.
 
@@ -395,7 +396,7 @@ Never commit GitLab personal access tokens to a public repository.
 
 When a user submits a query to GitLab:
 
-
+```text
 User
  ↓
 Streamlit Form
@@ -409,11 +410,11 @@ GitLab REST API
 GitLab Project
  ↓
 Issue Created
-
+```
 
 For AI analytics:
 
-
+```text
 GitLab Issues + Local Queries
               ↓
        Query Collection
@@ -429,7 +430,7 @@ GitLab Issues + Local Queries
        Query Clusters
               ↓
 Recurring Problem Patterns
-
+```
 
 ---
 
